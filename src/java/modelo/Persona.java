@@ -7,6 +7,15 @@ import java.util.logging.Logger;
 import java.util.ArrayList;
 
 public class Persona {
+    String dui_nuevo;
+
+    public String getDui_nuevo() {
+        return dui_nuevo;
+    }
+
+    public void setDui_nuevo(String dui_nuevo) {
+        this.dui_nuevo = dui_nuevo;
+    }
     String dui;
     String nombres;
     String apellidos;
@@ -48,6 +57,35 @@ public class Persona {
         return false;
     }
     
+    public boolean modificarDatos(){
+        try{
+            String myQuery = "update tb_persona set dui_persona='" + dui + "', nombre_persona = '" + nombres + "', apellidos_persona='" + apellidos+"' where dui_persona='" + dui_nuevo+"'";
+            int estado = 0;
+            state = cnn.createStatement();
+            estado = state.executeUpdate(myQuery);
+            if(estado == 1){
+                return true;
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean eliminarRegistro(){
+        try{
+            String myQuery = "delete from tb_persona where dui_persona = '" + dui + "';" ;
+            int estado = 0;
+            state = cnn.createStatement();
+            estado = state.executeUpdate(myQuery);
+            if(estado==1){
+                return true;
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     
     public ArrayList<Persona> consultarRegistro(){
         ArrayList<Persona> person = new ArrayList();

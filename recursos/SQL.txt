@@ -1,0 +1,9 @@
+create database bd_recurso_humano;
+
+use bd_recurso_humano;
+
+create table tb_persona(
+dui_persona varchar(10),
+nombre_persona varchar(30),
+apellidos_persona varchar(30)
+);
